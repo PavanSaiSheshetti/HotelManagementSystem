@@ -12,5 +12,7 @@ public interface OfferDetailsService {
 	public List<OfferDetails> getAllOffers();
 	public OfferDetails getofferById(int offerId);
 	public boolean isOfferExits(int offerId);
-    
+	public List<OfferDetails> getOfferByRoomType(String roomType);
+	public List<OfferDetails> findByRoomTypeAndRoomSize(String roomType,String roomSize);
+	
 }

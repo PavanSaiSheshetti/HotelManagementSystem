@@ -27,6 +27,9 @@ public class OfferDetails {
 	private String roomType;
 	
 	@Column(nullable=false)
+	private String roomSize;
+	
+	@Column(nullable=false)
 	private String offerName;
 
 	@Temporal(TemporalType.DATE)

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,24 @@ public class OfferDetailsController {
 			
 	}
 	
+	@GetMapping("getOfferByRoomType/{roomType}")
+	public ResponseEntity<List<OfferDetails>>  getOfferByRoomType(@PathVariable("roomType") String roomType) {
+	
+		List<OfferDetails> details;	
+		details=offerDetailsService.getOfferByRoomType(roomType);
+		return new ResponseEntity<List<OfferDetails>> (details,HttpStatus.OK);
+			
+	}
+	
+	@GetMapping("getOfferByRoomTypeAndRoomSize/{roomType}/{roomSize}")
+	public ResponseEntity<List<OfferDetails>>  getOfferByRoomTypeAndRoomSize(@PathVariable("roomType") String roomType,@PathVariable("roomSize") String roomSize) {
+	
+		List<OfferDetails> details;	
+		details=offerDetailsService.findByRoomTypeAndRoomSize(roomType,roomSize);
+		return new ResponseEntity<List<OfferDetails>> (details,HttpStatus.OK);
+			
+	}
+	
 	
 	//localhost:9090/hoteloffer
 	
@@ -81,7 +100,7 @@ public class OfferDetailsController {
 		
 		} 
 		else {
-			message = "Offer with Offer id : " + offerId + " doesn't exists ";
+			message = "Offer id : " + offerId + " doesn't exists ";
 			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
 		}
 		return responseEntity;

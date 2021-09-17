@@ -63,4 +63,18 @@ public class OfferDetailsServiceImpl implements  OfferDetailsService {
 		return offers.isPresent();
 	}
 
+	@Override
+	public List<OfferDetails> getOfferByRoomType(String roomType) {
+		
+		System.out.println("##Get Offers by RoomType Called....");
+		return (List<OfferDetails>) offerDetailsRepository.findByRoomType(roomType);
+	}
+
+	@Override
+	public List<OfferDetails> findByRoomTypeAndRoomSize(String roomType, String roomSize) {
+		
+		System.out.println("##Get Offers by RoomType and Room Size Called....");
+		return (List<OfferDetails>) offerDetailsRepository.findByRoomTypeAndRoomSize(roomType, roomSize);
+	}
+
 }
