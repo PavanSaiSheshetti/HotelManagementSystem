@@ -30,7 +30,7 @@ import com.revature.hms.service.WalletService;
 
 @RestController
 @RequestMapping("/Reception")
-@CrossOrigin(origins="http://localhost/4200")
+@CrossOrigin(origins="http://localhost:4200")
 public class ReceptionController {
 
 	Logger LOGGER = LoggerFactory.getLogger(BookingServiceImpl.class);
