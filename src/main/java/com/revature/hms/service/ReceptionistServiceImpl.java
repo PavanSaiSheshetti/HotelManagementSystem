@@ -28,6 +28,18 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 	private EntityManager em;
 	
 	@Override
+	public boolean receptionistLogin(int receptionistId, String receptionistPassword) {
+		Optional<Receptionist> receptionistData = receptionistRepository.findByReceptionistIdAndReceptionistPassword(receptionistId, receptionistPassword);
+		if(receptionistData!=null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		 
+	}
+	
+	@Override
 	public boolean addReceptionist(Receptionist receptionist) {
 		/*
 		 * List password=

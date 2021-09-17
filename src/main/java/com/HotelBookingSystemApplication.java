@@ -30,6 +30,7 @@ public class HotelBookingSystemApplication {
 		msg.setText(message);
 		mailSender.send(msg);
 		
+		
 	}
 
 }

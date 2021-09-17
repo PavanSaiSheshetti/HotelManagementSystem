@@ -8,6 +8,7 @@ public interface ReceptionistService {
 
 	
 	public boolean addReceptionist(Receptionist receptionist);
+	public boolean receptionistLogin(int receptionistId, String receptionistPassword);
 	
 	public boolean isReceptionistExists(int receptionistId);
 	

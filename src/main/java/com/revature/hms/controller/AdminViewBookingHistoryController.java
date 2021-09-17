@@ -1,7 +1,6 @@
 package com.revature.hms.controller;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +114,7 @@ public class AdminViewBookingHistoryController {
 			Collections.sort(allBookingDetails, new IdComparator(){
 				@Override
 				public int compare(BookingHistory o1,BookingHistory o2) {
-					if(o1.getCustomerUserName().compareTo(o2.getCustomerUserName())>0) {
+					if(o1.getUserName().compareTo(o2.getUserName())>0) {
 						return 1;
 					}
 					else {
@@ -129,7 +128,7 @@ public class AdminViewBookingHistoryController {
 			Collections.sort(allBookingDetails, new IdComparator(){
 				@Override
 				public int compare(BookingHistory o1,BookingHistory o2) {
-					if(o1.getCheckInDate().compareTo(o2.getCheckInDate())>0) {
+					if(o1.getCustomerCheckIn().compareTo(o2.getCustomerCheckIn())>0) {
 						return 1;
 					}
 					else {
@@ -143,7 +142,7 @@ public class AdminViewBookingHistoryController {
 			Collections.sort(allBookingDetails, new IdComparator(){
 				@Override
 				public int compare(BookingHistory o1,BookingHistory o2) {
-					if(o1.getCheckOutDate().compareTo(o2.getCheckOutDate())>0) {
+					if(o1.getCustomerCheckOut().compareTo(o2.getCustomerCheckOut())>0) {
 						return 1;
 					}
 					else {

@@ -18,16 +18,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name ="booking_history")	
+@Table(name ="bookings")	
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookingHistory {
+public class Booking {
 	
-	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int bookingId;
 	
+	@Id
 	private String userName;
 	
 	@Column(nullable= false)
