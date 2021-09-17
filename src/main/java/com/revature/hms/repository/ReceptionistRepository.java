@@ -1,6 +1,7 @@
 package com.revature.hms.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -14,6 +15,10 @@ public interface ReceptionistRepository extends JpaRepository<Receptionist, Inte
 //	  @Procedure 
 //	  String generate_Password();
 	
-	public List<Receptionist> findByReceptionistEmail(String receptionistEmail);
+	
+
+	public Receptionist findByReceptionistPhoneNumber(String receptionistPhoneNumber);
+
+	public Receptionist findByReceptionistEmail(String receptionist);
 	 
 }

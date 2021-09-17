@@ -10,7 +10,7 @@ public interface ReceptionistService {
 	public boolean addReceptionist(Receptionist receptionist);
 	
 	public boolean isReceptionistExists(int receptionistId);
-	
+	public boolean isReceptionistExists(String receptionistEmail);
 	public boolean updateReceptionist(Receptionist receptionist);
 	
 	public Receptionist viewDetails(int receptionistId);
@@ -20,8 +20,12 @@ public interface ReceptionistService {
 	public String generatePassword(int min, int max);
 
 	public List<Receptionist> getAllReceptionists();
-	public List<Receptionist> getReceptionistByEmail(String receptionistEmail);
+	public boolean getReceptionistByEmail(String receptionistEmail);
 	public boolean deleteReceptionist(int receptionistId);
 	public Receptionist getReceptionistByReceptionistId(int recptionistId);
+
+	public Receptionist getReceptionistByReceptionistPhoneNumber(String recptionistPhoneNumber);
+
+	public Receptionist getReceptionistByReceptionistEmail(String recptionistEmail);
 	
 }

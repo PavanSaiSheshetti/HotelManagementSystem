@@ -93,11 +93,6 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 
 
 
-	@Override
-	public List<Receptionist> getReceptionistByEmail(String receptionistEmail) {
-		
-		return receptionistRepository.findByReceptionistEmail(receptionistEmail);
-	}
 
 	@Override
 	public boolean deleteReceptionist(int receptionistId) {
@@ -114,6 +109,31 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 	@Override
 	public List<Receptionist> getAllReceptionists() {
 		return (List<Receptionist>) receptionistRepository.findAll();
+	}
+
+	@Override
+	public boolean isReceptionistExists(String receptionistEmail) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Receptionist getReceptionistByReceptionistPhoneNumber(String recptionistPhoneNumber) {
+		Receptionist receptionistData= receptionistRepository.findByReceptionistPhoneNumber(recptionistPhoneNumber); 
+		return receptionistData;
+	}
+
+	@Override
+	public Receptionist getReceptionistByReceptionistEmail(String recptionistEmail) {
+		Receptionist receptionistData = receptionistRepository.findByReceptionistEmail(recptionistEmail);
+		
+		return receptionistData;
+	}
+
+	@Override
+	public boolean getReceptionistByEmail(String receptionistEmail) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

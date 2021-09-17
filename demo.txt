@@ -1,2 +1,88 @@
 to check git commit..
 check again..
+
+postman comments
+
+
+select * from hoteloffers;
+
+drop table hoteloffers ;
+
+GET,POST,PUT
+localhost:9090/hoteloffer
+
+DELETE,GETBYID
+localhost:9090/hoteloffer/1
+
+{
+    
+    "roomType":"Dulex",
+    "offerName":"NewYear",
+    "offerFromDate":"2021-10-25",
+    "offerToDate":"2022-01-05",
+    "termsAndConditions":"Yes",
+    "offerDetails":"BreakFastFree",
+    "discountPercentage":30
+}
+
+{
+    "offerId":1
+    "roomType":"Dulex",
+    "offerName":"NewYear",
+    "offerFromDate":"2021-10-25",
+    "offerToDate":"2022-01-05",
+    "termsAndConditions":"Yes",
+    "offerDetails":"BreakFastFree",
+    "discountPercentage":30
+}
+
+}
+localhost:9090/room
+{
+    "roomId":1,
+    "roomPrice":55000,
+    "roomType":"AC",
+    "roomSize":"single",
+    "roomView":"balcony",
+    "floorNumber":12
+}
+localhost:9090/room
+
+Receptionist
+
+getall
+http://localhost:9090/adminController/getAll
+
+post
+
+
+http://localhost:9090/adminController/addreceptionist
+{
+    "receptionistName": "Pavi",
+    "receptionistPassword": "",
+    "receptionistAge": 57,
+    "receptionistPhoneNumber": "987534576",
+    "receptionistEmail": "hari117@gmail.com",
+    "address": "Titagudi",
+    "experience": "10",
+    "salary": 38999
+}
+
+put
+
+http://localhost:9090/adminController
+
+{
+     "receptionistId":1,
+    "receptionistName": "Pavi",
+    "receptionistPassword": "",
+    "receptionistAge": 57,
+    "receptionistPhoneNumber": "987534576",
+    "receptionistEmail": "hari117@gmail.com",
+    "address": "Titagudi",
+    "experience": "10",
+    "salary": 38999
+}
+delete,getbyid
+
+http://localhost:9090/adminController/1
