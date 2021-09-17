@@ -24,11 +24,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Booking {
 	
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int bookingId;
 	
-	@Id
-	private String userName;
+	private String customerUserName;
 	
 	@Column(nullable= false)
 	private String customerName;
@@ -38,6 +38,9 @@ public class Booking {
 	
 	@Column(nullable=false, unique=true)
 	private String email;
+	
+	@Column
+	private String idProof;
 	
 	@Column(nullable=false)
 	private String roomType;
@@ -60,12 +63,12 @@ public class Booking {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
-	private Calendar customerCheckIn;
+	private Calendar checkInDate;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
-	private Calendar customerCheckOut;
+	private Calendar checkOutDate;
 	
 	@Column
 	private int roomNumber;
@@ -74,13 +77,13 @@ public class Booking {
 	private String pickupAndDrop;
 	
 	@Column
-	private String cancellation;
+	private String cancellation="False";
 	
 	@Column(nullable=false)
-	private String bookingStatus;
+	private String bookingStatus="Pending";
 	
 	@Column(nullable=false)
-	private int amountPaid;		
+	private int roomPrice;		
 	
 	@Column
 	private String specialization;

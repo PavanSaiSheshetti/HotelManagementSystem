@@ -12,13 +12,14 @@ import com.revature.hms.model.Booking;
 
 
 
-public interface BookingRepository extends CrudRepository<Booking,String>{
+public interface BookingRepository extends CrudRepository<Booking,Integer>{
 	
 	public List<Booking>findByCancellation(String cancellation);
 	public List<Booking>findByRoomNumberGreaterThan(int roomNumber);
 	public Optional<Booking> findByRoomNumber(int roomNumber);
 	
-	public Booking findByUserName(String userName);
+	public Booking findByCustomerUserName(String userName);
 	@Transactional
-	public String deleteByUserName(String userName);
+	public String deleteByCustomerUserName(String userName);
+
 }

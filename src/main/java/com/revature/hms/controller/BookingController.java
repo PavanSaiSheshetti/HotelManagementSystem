@@ -99,14 +99,14 @@ public class BookingController {
 			LOGGER.info("******************** ROOM IS EMPTY, ALLOCATE ROOM ");
 			
 			result = bookingService.updateRecord(booking);
-			String username = booking.getUserName();
+			String username = booking.getCustomerUserName();
 			booking = bookingService.findByUserName(username);
 			String toUserMail = booking.getEmail();
 			message = "Congratulations! and Hearty Welcome "+ 
-					 "\n Dear "+booking.getUserName()+"\n"
+					 "\n Dear "+booking.getCustomerUserName()+"\n"
 					 +"You have successfully Booked a room in our Hotel with Room no : "
 					 +booking.getRoomNumber()+
-					 "With an initial Amount of INR: "+booking.getAmountPaid();
+					 "With an initial Amount of INR: "+booking.getRoomPrice();
 			 mailApplication.sendMail(from, toUserMail,subject , message);
 			 LOGGER.info("Mail Sent Successfully...");
 			responseEntity = new ResponseEntity<String>(message,HttpStatus.OK);

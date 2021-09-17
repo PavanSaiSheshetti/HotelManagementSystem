@@ -22,7 +22,7 @@ public class BookingHistoryServiceImpl implements BookingHistoryService{
 	public boolean addToHistory(String userName) {
 		Booking customerBooking = new Booking();
 		customerBooking =  bookingService.findByUserName(userName);
-		BookingHistory bookingHistory=new BookingHistory(customerBooking.getBookingId(),customerBooking.getUserName(),customerBooking.getCustomerName(), customerBooking.getCustomerMobileno(), customerBooking.getEmail(),customerBooking.getRoomType(),customerBooking.getRoomSize(),customerBooking.getBreakfast(),customerBooking.getDrinks(),customerBooking.getNumberOfRooms(),customerBooking.getNumberOfMembers(), customerBooking.getCustomerCheckIn(), customerBooking.getCustomerCheckOut(),customerBooking.getRoomNumber(),customerBooking.getPickupAndDrop(),customerBooking.getCancellation(), customerBooking.getBookingStatus(), customerBooking.getAmountPaid(),customerBooking.getSpecialization());
+		BookingHistory bookingHistory=new BookingHistory(customerBooking.getBookingId(),customerBooking.getCustomerUserName(),customerBooking.getCustomerName(), customerBooking.getCustomerMobileno(), customerBooking.getEmail(),customerBooking.getIdProof(),customerBooking.getRoomType(),customerBooking.getRoomSize(),customerBooking.getBreakfast(),customerBooking.getDrinks(),customerBooking.getNumberOfRooms(),customerBooking.getNumberOfMembers(), customerBooking.getCheckInDate(), customerBooking.getCheckOutDate(),customerBooking.getRoomNumber(),customerBooking.getPickupAndDrop(),customerBooking.getCancellation(), customerBooking.getBookingStatus(), customerBooking.getRoomPrice(),customerBooking.getSpecialization());
 		bookingHistoryRepository.save(bookingHistory);
 		return true;
 	}

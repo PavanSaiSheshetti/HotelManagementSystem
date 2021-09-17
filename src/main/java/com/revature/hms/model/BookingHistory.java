@@ -25,10 +25,10 @@ import lombok.NoArgsConstructor;
 public class BookingHistory {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int bookingId;
 	
-	private String userName;
+	private String customerUserName;
 	
 	@Column(nullable= false)
 	private String customerName;
@@ -38,6 +38,9 @@ public class BookingHistory {
 	
 	@Column(nullable=false, unique=true)
 	private String email;
+	
+	@Column
+	private String idProof;
 	
 	@Column(nullable=false)
 	private String roomType;
@@ -60,12 +63,12 @@ public class BookingHistory {
 	@Basic
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
-	private Calendar customerCheckIn;
+	private Calendar checkInDate;
 	
 	@Basic
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=false)
-	private Calendar customerCheckOut;
+	private Calendar checkOutDate;
 	
 	@Column
 	private int roomNumber;
@@ -74,13 +77,13 @@ public class BookingHistory {
 	private String pickupAndDrop;
 	
 	@Column
-	private String cancellation;
+	private String cancellation="False";
 	
 	@Column(nullable=false)
-	private String bookingStatus;
+	private String bookingStatus="Pending";
 	
 	@Column(nullable=false)
-	private int amountPaid;		
+	private int roomPrice;		
 	
 	@Column
 	private String specialization;
