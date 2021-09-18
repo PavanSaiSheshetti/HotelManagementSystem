@@ -109,26 +109,26 @@ public class AdminController
 	   return responseEntity;
 	}
 	
-//	@GetMapping("/searchByAdminIdAndAdminPassword/{adminId}/{adminPassword}")
-//	public ResponseEntity<Admin> adminLogin(@PathVariable("adminId") int adminId, @PathVariable("adminPassword") String adminPassword){
-//		
-//			 ResponseEntity<Admin> responseEntity=null;
-//			Admin admin =new Admin();
-//			 boolean res=false;		
-//			 res=adminService.adminLogin(adminId,adminPassword);
-//			 if(res) {
-//			admin=adminService.getAdminById(adminId); 
-//			responseEntity=new ResponseEntity<Admin> (admin,HttpStatus.OK);
-//			 System.out.println("logged successfully");
-//			 } 
-//			 else {
-//			 responseEntity=new ResponseEntity<Admin> (admin,HttpStatus.OK);
-//			 System.out.println("Your login details are not matched");
-//			 }
-//			
-//			 return responseEntity;
-//			  	
-//		}
+	@GetMapping("/searchByAdminIdAndAdminPassword/{adminId}/{adminPassword}")
+	public ResponseEntity<Admin> adminLogin(@PathVariable("adminId") int adminId, @PathVariable("adminPassword") String adminPassword){
+		
+			 ResponseEntity<Admin> responseEntity=null;
+			Admin admin =new Admin();
+			 boolean res=false;		
+			 res=adminService.adminLogin(adminId,adminPassword);
+			 if(res) {
+			admin=adminService.getAdminById(adminId); 
+			responseEntity=new ResponseEntity<Admin> (admin,HttpStatus.OK);
+			 System.out.println("logged successfully");
+			 } 
+			 else {
+			 responseEntity=new ResponseEntity<Admin> (admin,HttpStatus.OK);
+			 System.out.println("Your login details are not matched");
+			 }
+			
+			 return responseEntity;
+			  	
+		}
 	
 	
 	@GetMapping("/getAll")
