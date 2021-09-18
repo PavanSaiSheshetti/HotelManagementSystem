@@ -24,5 +24,7 @@ public interface ReceptionistService {
 	public List<Receptionist> getReceptionistByEmail(String receptionistEmail);
 	public boolean deleteReceptionist(int receptionistId);
 	public Receptionist getReceptionistByReceptionistId(int recptionistId);
-	
+	public Receptionist getReceptionistByReceptionistPhoneNumber(String recptionistPhoneNumber);
+
+	public Receptionist getReceptionistByReceptionistEmail(String recptionistEmail);
 }

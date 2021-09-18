@@ -13,7 +13,7 @@ public interface ReceptionistRepository extends JpaRepository<Receptionist, Inte
 	
 //	  @Procedure 
 //	  String generate_Password();
-	
-	public List<Receptionist> findByReceptionistEmail(String receptionistEmail);
+	public Receptionist findByReceptionistPhoneNumber(String receptionistPhoneNumber);
+	public Receptionist findByReceptionistEmail(String receptionistEmail);
 	public Optional<Receptionist> findByReceptionistIdAndReceptionistPassword(int receptionistId, String receptionistPassword);
 }

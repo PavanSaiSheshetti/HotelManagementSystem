@@ -207,4 +207,27 @@ public class AdminController
 		System.out.println(rec);
 		return responseEntity;
 	}
+
+@GetMapping("/phnno/{receptionistPhoneNumber}")
+	public ResponseEntity<Receptionist> getReceptionistByPhoneNumber(@PathVariable("receptionistPhoneNumber") String receptionistPhoneNumber){
+		ResponseEntity<Receptionist> responseEntity = null;
+		System.out.println("View receptionist By Phonenumber called");
+	
+		 Receptionist receptionist = receptionistService.getReceptionistByReceptionistPhoneNumber(receptionistPhoneNumber);
+		 
+		 	responseEntity = new ResponseEntity<Receptionist>(receptionist,HttpStatus.OK);
+		 
+		return responseEntity;
+	}
+	@GetMapping("/email/{receptionistEmail}")
+	public ResponseEntity<Receptionist> getReceptionistByEmail(@PathVariable("receptionistEmail") String receptionistEmail){
+		ResponseEntity<Receptionist> responseEntity = null;
+		System.out.println("View receptionist By receptionistEmail called");
+	
+		 Receptionist receptionist = receptionistService.getReceptionistByReceptionistEmail(receptionistEmail);
+		 
+		 	responseEntity = new ResponseEntity<Receptionist>(receptionist,HttpStatus.OK);
+		 
+		return responseEntity;
+	}
 }
