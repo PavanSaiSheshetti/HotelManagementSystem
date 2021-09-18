@@ -33,7 +33,7 @@ public class RoomController {
 	// get room by id
 
 	@GetMapping("/{roomId}")
-	public ResponseEntity<Room> getUserById(@PathVariable("roomId") int roomId) {
+	public ResponseEntity<Room> getRoomById(@PathVariable("roomId") int roomId) {
 
 		Room room = new Room();
 		if (roomService.isRoomExists(roomId)) {
@@ -49,7 +49,7 @@ public class RoomController {
 	// insert a room
 
 	@PostMapping
-	public ResponseEntity<String> addUser(@RequestBody Room room) {
+	public ResponseEntity<String> addRoom(@RequestBody Room room) {
 
 		int roomId = room.getRoomId();
 
@@ -69,7 +69,7 @@ public class RoomController {
 	// update a room
 
 	@PutMapping
-	public ResponseEntity<String> updateUser(@RequestBody Room room) {
+	public ResponseEntity<String> updateRoom(@RequestBody Room room) {
 
 		int roomId = room.getRoomId();
 
@@ -86,7 +86,7 @@ public class RoomController {
 	// delete a room
 
 	@DeleteMapping("/{roomId}")
-	public ResponseEntity<String> deletePatient(@PathVariable("roomId") int roomId) {
+	public ResponseEntity<String> deleteRoom(@PathVariable("roomId") int roomId) {
 
 		if (roomService.isRoomExists(roomId)) {
 			roomService.deleteRoom(roomId);

@@ -73,7 +73,7 @@ public class OfferDetailsController {
 	//localhost:9090/hoteloffer
 	
 	@PostMapping
-	public ResponseEntity<String> addProduct(@RequestBody OfferDetails offerDetails) {
+	public ResponseEntity<String> addOffer(@RequestBody OfferDetails offerDetails) {
 
 		ResponseEntity<String> responseEntity = null;
 		
@@ -110,7 +110,7 @@ public class OfferDetailsController {
 	//localhost:9090/hoteloffer
 	
 	@PutMapping
-	public ResponseEntity<String>  updateProduct(@RequestBody OfferDetails offerDetails) {
+	public ResponseEntity<String>  updateOffer(@RequestBody OfferDetails offerDetails) {
 
 		ResponseEntity<String> responseEntity = null;
 		int offerId = offerDetails.getOfferId();
