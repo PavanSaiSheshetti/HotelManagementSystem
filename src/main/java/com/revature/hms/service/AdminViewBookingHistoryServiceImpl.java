@@ -29,7 +29,7 @@ public class AdminViewBookingHistoryServiceImpl implements AdminViewBookingHisto
 
 	@Override
 	public List<BookingHistory> getBookingByCustomerUserName(String customerUserName) {
-		return adminViewBookingHistoryRepository.findAllByCustomerUserName(customerUserName);
+		return adminViewBookingHistoryRepository.findAllByCustomerUserNameContains(customerUserName);
 	}
 
 	@Override

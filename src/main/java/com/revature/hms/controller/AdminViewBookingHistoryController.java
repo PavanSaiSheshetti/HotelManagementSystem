@@ -1,6 +1,7 @@
 package com.revature.hms.controller;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class AdminViewBookingHistoryController {
 	@Autowired
 	AdminViewBookingHistoryService adminViewBookingHistoryService;
 	
+	@Autowired
+	List<BookingHistory> allBookingDetails;
+	
 	@PostMapping
 	public ResponseEntity<String> addBooking(@RequestBody BookingHistory bookingHistory){
 		ResponseEntity<String> responseEntity = null;
@@ -43,7 +47,7 @@ public class AdminViewBookingHistoryController {
 	@GetMapping
 	public ResponseEntity<List<BookingHistory>> getBookingDetails(){
 		ResponseEntity<List<BookingHistory>> responseEntity = null;
-		List<BookingHistory> allBookingDetails = adminViewBookingHistoryService.getAllBookings();
+		allBookingDetails = adminViewBookingHistoryService.getAllBookings();
 		if(allBookingDetails.size()==0) {
 			System.out.println("No bookings are available");
 			responseEntity = new ResponseEntity<List<BookingHistory>>(allBookingDetails,HttpStatus.NO_CONTENT);			
@@ -76,7 +80,7 @@ public class AdminViewBookingHistoryController {
 	@GetMapping("customer/{customerUserName}")
 	public ResponseEntity<List<BookingHistory>> getBookingDetailsByCustomerName(@PathVariable String customerUserName){
 		ResponseEntity<List<BookingHistory>> responseEntity = null;
-		List<BookingHistory> allBookingDetails = adminViewBookingHistoryService.getBookingByCustomerUserName(customerUserName);
+		allBookingDetails = adminViewBookingHistoryService.getBookingByCustomerUserName(customerUserName);
 		System.out.println(allBookingDetails);
 		responseEntity = new ResponseEntity<List<BookingHistory>>(allBookingDetails,HttpStatus.OK);
 		return responseEntity;
@@ -85,7 +89,7 @@ public class AdminViewBookingHistoryController {
 	@GetMapping("roomDetails/type/{roomType}")
 	public ResponseEntity<List<BookingHistory>> getBookingDetailsByRoomType(@PathVariable String roomType){
 		ResponseEntity<List<BookingHistory>> responseEntity = null;
-		List<BookingHistory> allBookingDetails = adminViewBookingHistoryService.getBookingByRoomType(roomType);
+		allBookingDetails = adminViewBookingHistoryService.getBookingByRoomType(roomType);
 		System.out.println(allBookingDetails);
 		responseEntity = new ResponseEntity<List<BookingHistory>>(allBookingDetails,HttpStatus.OK);
 		return responseEntity;
@@ -94,7 +98,7 @@ public class AdminViewBookingHistoryController {
 	@GetMapping("roomDetails/number/{roomNumber}")
 	public ResponseEntity<List<BookingHistory>> getBookingDetailsByRoomNumber(@PathVariable int  roomNumber){
 		ResponseEntity<List<BookingHistory>> responseEntity = null;
-		List<BookingHistory> allBookingDetails = adminViewBookingHistoryService.getBookingByRoomNumber(roomNumber);
+		allBookingDetails = adminViewBookingHistoryService.getBookingByRoomNumber(roomNumber);
 		System.out.println(allBookingDetails);
 		responseEntity = new ResponseEntity<List<BookingHistory>>(allBookingDetails,HttpStatus.OK);
 		return responseEntity;
@@ -103,8 +107,9 @@ public class AdminViewBookingHistoryController {
 	@GetMapping("sorting/{sortingParameter}")
 	public ResponseEntity<List<BookingHistory>> getBookingDetailsBySorting(@PathVariable("sortingParameter") String  sortingParameter){
 		ResponseEntity<List<BookingHistory>> responseEntity = null;
-		List<BookingHistory> allBookingDetails = adminViewBookingHistoryService.getAllBookings();
-		System.out.println(allBookingDetails);
+
+		System.out.println(sortingParameter);
+		System.out.println("Before sorting - "+this.allBookingDetails);
 		switch(sortingParameter) {
 		case "id":
 			Collections.sort(allBookingDetails, new IdComparator());

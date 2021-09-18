@@ -10,7 +10,7 @@ import com.revature.hms.model.BookingHistory;
 @EnableJpaRepositories
 public interface AdminViewBookingHistoryRepository extends CrudRepository<BookingHistory, Integer> {
 
-	List<BookingHistory> findAllByCustomerUserName(String customerUserName);
+	List<BookingHistory> findAllByCustomerUserNameContains(String customerUserName);
 
 	List<BookingHistory> findAllByRoomType(String roomType);
 
