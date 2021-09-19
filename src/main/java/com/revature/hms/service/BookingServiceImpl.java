@@ -3,6 +3,8 @@ package com.revature.hms.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +77,13 @@ public class BookingServiceImpl implements BookingService {
 		LOGGER.info("--------------------- FIND BY USERNAME METHOD CALLED");
 	    Booking booking=bookingRepository.findByCustomerUserName(userName);
 		return booking;
+	}
+	
+	@Transactional
+	@Override
+	public void updateStatus(String userName, String status) {
+		// TODO Auto-generated method stub
+		LOGGER.info("------------------UPDATE STATUS is called");
+		bookingRepository.updateStatus(userName, status);
 	}
 }

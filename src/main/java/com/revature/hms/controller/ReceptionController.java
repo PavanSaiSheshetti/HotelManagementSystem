@@ -27,75 +27,71 @@ import com.revature.hms.service.BookingServiceImpl;
 import com.revature.hms.service.ReceptionistService;
 import com.revature.hms.service.WalletService;
 
-
 @RestController
 @RequestMapping("/Reception")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ReceptionController {
 
 	Logger LOGGER = LoggerFactory.getLogger(BookingServiceImpl.class);
-	
+
 	@Autowired
 	WalletService walletService;
 
 	@Autowired
 	BookingService bookingService;
-	
+
 	@Autowired
 	private BookingHistoryService bookingHistoryService;
-	
+
 	@Autowired
 	private ReceptionistService receptionistService;
-	
-	
+
 	@PutMapping("{receptionistId}")
-	public ResponseEntity<String> updateMyProfile(@RequestBody Receptionist receptionist){
-	   ResponseEntity<String> responseEntity = null;
-	   int receptionistId= receptionist.getReceptionistId();
-	   String message= null;
-	   if(receptionistService.isReceptionistExists(receptionistId)) {
-		   receptionistService.updateReceptionist(receptionist); 
-		   //Receptionist receptionist1 = receptionistService.viewDetails(receptionistId);
-		   message="Receptionist with ReceptionistId " +receptionistId + " details has been Updated Successfully ";
-		   responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
-	   }
-	   else {
-		   message="Receptionist with ReceptionistId" +receptionistId+ "does not exist";
-		   responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
-	   }
-	   return responseEntity;
-	}
-	
-	@GetMapping("/searchByReceptionistIdAndReceptionistPassword/{receptionistId}/{receptionistPassword}")
-	public ResponseEntity<Receptionist> receptionistLogin(@PathVariable("receptionistId") int receptionistId, @PathVariable("receptionistPassword") String receptionistPassword){
-		
-			 ResponseEntity<Receptionist> responseEntity=null;
-			 Receptionist receptionist = null;
-			 boolean res=false;		
-			 res=receptionistService.receptionistLogin(receptionistId, receptionistPassword);
-			 if(res) {
-		    // receptionist= receptionistService.viewDetails(receptionistId);
-			 responseEntity=new ResponseEntity<Receptionist> (receptionist,HttpStatus.OK);
-			 System.out.println("logged successfully");
-			 } 
-			 else {
-			 responseEntity=new ResponseEntity<Receptionist> (receptionist,HttpStatus.CONFLICT);
-			 System.out.println("Your login details are not matched");
-			 }
-			
-			 return responseEntity;
-			  	
+	public ResponseEntity<String> updateMyProfile(@RequestBody Receptionist receptionist) {
+		ResponseEntity<String> responseEntity = null;
+		int receptionistId = receptionist.getReceptionistId();
+		String message = null;
+		if (receptionistService.isReceptionistExists(receptionistId)) {
+			receptionistService.updateReceptionist(receptionist);
+			// Receptionist receptionist1 = receptionistService.viewDetails(receptionistId);
+			message = "Receptionist with ReceptionistId " + receptionistId + " details has been Updated Successfully ";
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+		} else {
+			message = "Receptionist with ReceptionistId" + receptionistId + "does not exist";
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
 		}
-	
+		return responseEntity;
+	}
+
+	@GetMapping("/searchByReceptionistIdAndReceptionistPassword/{receptionistId}/{receptionistPassword}")
+	public ResponseEntity<Receptionist> receptionistLogin(@PathVariable("receptionistId") int receptionistId,
+			@PathVariable("receptionistPassword") String receptionistPassword) {
+
+		ResponseEntity<Receptionist> responseEntity = null;
+		Receptionist receptionist = null;
+		boolean res = false;
+		res = receptionistService.receptionistLogin(receptionistId, receptionistPassword);
+		if (res) {
+			// receptionist= receptionistService.viewDetails(receptionistId);
+			responseEntity = new ResponseEntity<Receptionist>(receptionist, HttpStatus.OK);
+			System.out.println("logged successfully");
+		} else {
+			responseEntity = new ResponseEntity<Receptionist>(receptionist, HttpStatus.CONFLICT);
+			System.out.println("Your login details are not matched");
+		}
+
+		return responseEntity;
+
+	}
+
 	@GetMapping("/searchByReceptionistId/{receptionistId}")
-	public ResponseEntity<Receptionist> getReceptionistById(@PathVariable("receptionistId") int receptionistId){
+	public ResponseEntity<Receptionist> getReceptionistById(@PathVariable("receptionistId") int receptionistId) {
 		ResponseEntity<Receptionist> responseEntity = null;
 		Receptionist receptionist = new Receptionist();
-		if(receptionistService.isReceptionistExists(receptionistId)) {
-			 receptionist= receptionistService.viewDetails(receptionistId);
-			 responseEntity = new ResponseEntity<Receptionist>(receptionist, HttpStatus.OK);
-		}
-		else {
+		if (receptionistService.isReceptionistExists(receptionistId)) {
+			receptionist = receptionistService.viewDetails(receptionistId);
+			responseEntity = new ResponseEntity<Receptionist>(receptionist, HttpStatus.OK);
+		} else {
 			responseEntity = new ResponseEntity<Receptionist>(receptionist, HttpStatus.OK);
 
 		}
@@ -114,10 +110,8 @@ public class ReceptionController {
 
 	@SuppressWarnings("deprecation")
 	@PutMapping("/{username}/{dateIn}")
-	ResponseEntity<Boolean> addMoneyForCancellation(
-			@PathVariable("username") String username,
-			@PathVariable("dateIn") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateIn
-			) throws ParseException {
+	ResponseEntity<Boolean> addMoneyForCancellation(@PathVariable("username") String username,
+			@PathVariable("dateIn") @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateIn) throws ParseException {
 		ResponseEntity<Boolean> responseEntity = null;
 
 		Booking booking = bookingService.findByUserName(username);
@@ -147,12 +141,12 @@ public class ReceptionController {
 					bookingHistoryService.addToHistory(username);
 					bookingService.deleteRecord(username);
 
-					message = "Dear " + username + "," + 
-							 "\n Your cancellation request has been succesfully processed and your booking has been cancelled successfully"+
-							"\nYour payment during the booking of your hotel room has been refunded successfully to yourrespective wallet." +
-							  "\nThank you for thinking about us for your hotel needs"+
-							"\nPlease query us at menando@gmail.com, we would love to hear from you" + 
-							 "\n Regards" + "\n Menando resort";
+					message = "Dear " + username + ","
+							+ "\n Your cancellation request has been succesfully processed and your booking has been cancelled successfully"
+							+ "\nYour payment during the booking of your hotel room has been refunded successfully to yourrespective wallet."
+							+ "\nThank you for thinking about us for your hotel needs"
+							+ "\nPlease query us at menando@gmail.com, we would love to hear from you" + "\n Regards"
+							+ "\n Menando resort";
 					walletService.sendMail(from, to, subject, message);
 					responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
 				} else {
@@ -195,7 +189,7 @@ public class ReceptionController {
 				LOGGER.info("******************** DELETED CANCELLED ROOM RECORD FROM DATABASE");
 
 				// need to update the record into booking history then delete record in db.
-				bookingHistoryService.addToHistory(username);	
+				bookingHistoryService.addToHistory(username);
 				bookingService.deleteRecord(username);
 				message = "Dear " + username + "," + "\n"
 						+ "\n Your cancellation request has been succesfully processed and your booking has been cancelled successfully"
@@ -214,7 +208,7 @@ public class ReceptionController {
 		return responseEntity;
 
 	}
-	
+
 	@PutMapping("/updateWallet/{customerUserName}/{walletAmount}")
 	public ResponseEntity<String> updateMoneyToWallet(@PathVariable String customerUserName,
 			@PathVariable int walletAmount) {// Working
@@ -233,88 +227,86 @@ public class ReceptionController {
 		return responseEntity;
 	}
 
-	@PutMapping("payment/{username}")
-	ResponseEntity<Boolean> deductMoneyFromCheckOut(
-			@PathVariable("username") String username) {
+	@PutMapping("status/{userName}/{status}")
+	public ResponseEntity<String> updateStatus(@PathVariable String userName, @PathVariable String status) {
 
-		Booking booking = bookingService.findByUserName(username);
-		String status = booking.getBookingStatus();
+		ResponseEntity<String> responseEntity = null;
+		bookingService.updateStatus(userName, status);
+		Booking booking = bookingService.findByUserName(userName);
+		status = booking.getBookingStatus();
 		int price = booking.getRoomPrice();
-		ResponseEntity<Boolean> responseEntity = null;
 		if (status.compareToIgnoreCase("booked") == 0) {
-		
+
 			price = (price / 100) * 10;
-			boolean result = walletService.deductMoney(username, price);
-			if(result) {
+			boolean result = walletService.deductMoney(userName, price);
+			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
 				String subject = "Thank you booking with us";
-				String message = "Dear " + username + "," + "\n"
+				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for making an booking with us your booking has been processed"
 						+ "Your payment during the booking of you hotel room has been reducted successfully from your respective wallet."
 						+ "\n\nThank you for thinking about us for your hotel needs" + "\n \nPlease query us at "
 						+ "menando@gmail.com, we would love to hear from you" + "\n \n" + "Regards"
 						+ "\n Menando resort";
 				walletService.sendMail(from, to, subject, message);
-				responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
+				responseEntity = new ResponseEntity<String>("10% money deducted", HttpStatus.OK);
 			}
-			responseEntity = new ResponseEntity<Boolean>(true, HttpStatus.OK);
-			}
-		else if (status.compareToIgnoreCase("IN") == 0) {
+			responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.OK);
+		} else if (status.compareToIgnoreCase("IN") == 0) {
 			price = (price / 100) * 40;
-			boolean result = walletService.deductMoney(username, price);
-			if(result) {
+			boolean result = walletService.deductMoney(userName, price);
+			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
 				String subject = "Thank you booking with us";
-				String message = "Dear " + username + "," + "\n"
+				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for Checking in with your booking, your booking status has been processed"
 						+ "Your payment during the checkin of the hotel room has been reducted successfully from your respective wallet."
 						+ "\n\nThank you for thinking about us for your hotel needs" + "\n \nPlease query us at "
 						+ "menando@gmail.com, we would love to hear from you" + "\n \n" + "Regards"
 						+ "\n Menando resort";
 				walletService.sendMail(from, to, subject, message);
-				responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
+				responseEntity = new ResponseEntity<String>("40% money deducted", HttpStatus.OK);
 			}
 		} else if (status.compareToIgnoreCase("OUT") == 0) {
 			price = (price / 100) * 50;
-			boolean result = walletService.deductMoney(username, price);
-			if(result) {
+			boolean result = walletService.deductMoney(userName, price);
+			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
 				String subject = "Thank you booking with us";
-				String message = "Dear " + username + "," + "\n"
+				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for Checking out with your booking, your booking status has been processed"
 						+ "Your payment during the checkout of the hotel room has been reducted successfully from your respective wallet."
 						+ "\n\nThank you for thinking about us for your hotel needs" + "\n \nPlease query us at "
 						+ "menando@gmail.com, we would love to hear from you" + "\n \n" + "Regards"
 						+ "\n Menando resort";
 				walletService.sendMail(from, to, subject, message);
-				responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
+				responseEntity = new ResponseEntity<String>("50% percent money deducted", HttpStatus.OK);
 			}
-			
+
 		} else {
-			responseEntity = new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+			responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.BAD_REQUEST);
 		}
 
+		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
 		return responseEntity;
 	}
-	
+
 	@SuppressWarnings("unused")
 	@GetMapping("/{customerUserName}/getBalance")
 	public ResponseEntity<Integer> getCustomerBalance(@PathVariable String customerUserName) {
 		ResponseEntity<Integer> responseEntity = null;
-		
-		
-		Wallet wallet=walletService.getCustomerBalance(customerUserName);
-		int amount=wallet.getMoney();
-		if(wallet!=null) {
-			
-			 amount=wallet.getMoney();
-			
+
+		Wallet wallet = walletService.getCustomerBalance(customerUserName);
+		int amount = wallet.getMoney();
+		if (wallet != null) {
+
+			amount = wallet.getMoney();
+
 			responseEntity = new ResponseEntity<Integer>(amount, HttpStatus.OK);
-		} 
-		else {
+		} else {
 
 			amount = 0;
 			responseEntity = new ResponseEntity<Integer>(amount, HttpStatus.NOT_FOUND);

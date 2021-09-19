@@ -29,8 +29,6 @@ public class HotelBookingSystemApplication {
 		msg.setSubject(subject);
 		msg.setText(message);
 		mailSender.send(msg);
-		
-		
 	}
 
 }
