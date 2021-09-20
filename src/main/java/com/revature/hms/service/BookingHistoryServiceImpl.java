@@ -27,4 +27,11 @@ public class BookingHistoryServiceImpl implements BookingHistoryService{
 		return true;
 	}
 
+	@Override
+	public boolean deleteHistory(int bookingId) {
+		// TODO Auto-generated method stub
+		bookingHistoryRepository.deleteById(bookingId);
+		return true;
+	}
+
 }

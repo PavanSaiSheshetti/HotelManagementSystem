@@ -2,6 +2,7 @@ package com.revature.hms.controller;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +46,22 @@ public class ReceptionController {
 
 	@Autowired
 	private ReceptionistService receptionistService;
+	
+	@GetMapping("requests/{cancellationStatus}")
+	public ResponseEntity<List<Booking>> getCancellations(@PathVariable String cancellationStatus){
+		
+		ResponseEntity<List<Booking>> responseEntity = null;
+		List<Booking> bookingsList = bookingService.viewCancellations(cancellationStatus);
+		if(bookingsList.size() == 0) {
+			responseEntity = new ResponseEntity<List<Booking>>(bookingsList,HttpStatus.NOT_FOUND);
+		}
+		else {
+			responseEntity = new ResponseEntity<List<Booking>>(bookingsList,HttpStatus.OK);
+		}
+		
+		return responseEntity;
+		
+	}
 
 	@PutMapping("{receptionistId}")
 	public ResponseEntity<String> updateMyProfile(@RequestBody Receptionist receptionist) {

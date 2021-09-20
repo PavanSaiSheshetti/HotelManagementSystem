@@ -3,6 +3,7 @@ package com.revature.hms.service;
 import java.util.List;
 
 import com.revature.hms.model.Booking;
+import com.revature.hms.model.BookingHistory;
 
 public interface BookingService {
 
@@ -23,4 +24,6 @@ public interface BookingService {
 	public void updateStatus(String userName, String status);
 
 	public Booking findByUserName(String userName);
+	
+	public List<BookingHistory> getBookingsHistory();
 }

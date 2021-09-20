@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.hms.model.Booking;
+import com.revature.hms.model.BookingHistory;
+import com.revature.hms.repository.BookingHistoryRepository;
 import com.revature.hms.repository.BookingRepository;
 
 
@@ -22,6 +24,9 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
 	BookingRepository bookingRepository;
+	
+	@Autowired
+	BookingHistoryRepository bookingsHistoryRepository;
 
 	@Override
 	public List<Booking> viewBookingRecords() {
@@ -85,5 +90,13 @@ public class BookingServiceImpl implements BookingService {
 		// TODO Auto-generated method stub
 		LOGGER.info("------------------UPDATE STATUS is called");
 		bookingRepository.updateStatus(userName, status);
+	}
+
+	@Override
+	public List<BookingHistory> getBookingsHistory() {
+		// TODO Auto-generated method stub
+		LOGGER.info("Bookings history called");
+		List<BookingHistory> bookingsHistoryList = bookingsHistoryRepository.findAll();
+		return bookingsHistoryList;
 	}
 }
