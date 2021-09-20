@@ -14,5 +14,7 @@ public interface RoomService {
 	
 	public List<Room> getAllRooms();
 	public boolean isRoomExists(int roomId);
+	public List<Room> roomByStatus(boolean roomStatus);
+	public int updateStatus(int roomId,boolean roomStatus);
 
 }

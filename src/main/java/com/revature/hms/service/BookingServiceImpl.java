@@ -45,23 +45,32 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public boolean updateRecord(Booking booking) {
+	public boolean updateRecord(String userName,int roomNumber) {
 		LOGGER.info("--------------------- RECORD UPDATED METHOD CALLED ");
-		bookingRepository.save(booking);
+		bookingRepository.updateRoomNumber(userName,roomNumber);
 		return true;
 	}
 
 	@Override
 	public boolean isRoomNumberExists(int roomNumber) {
 		LOGGER.info("--------------------- BOOKING RECORD EXISTS METHOD CALLED ");
-		Optional<Booking> bookingRoom = bookingRepository.findByRoomNumber(roomNumber);
-		return bookingRoom.isPresent();
+		Booking bookingRoom = bookingRepository.findByRoomNumber(roomNumber);
+		if(bookingRoom!=null)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	public List<Booking> viewBookedRooms(int roomNumber) {
 		LOGGER.info("--------------------- ROOMS OF BOOKED RECORDS METHOD CALLED");
+		if(roomNumber==0) {
+
+			return bookingRepository.findByRoomNumberIs(roomNumber);
+		}else
+		{
 		return bookingRepository.findByRoomNumberGreaterThan(roomNumber);
+		}
 	}
 
 
@@ -72,6 +81,7 @@ public class BookingServiceImpl implements BookingService {
 		return true;
 	}
 
+	@Transactional
 	@Override
 	public Booking findByUserName(String userName) {
 		LOGGER.info("--------------------- FIND BY USERNAME METHOD CALLED");

@@ -52,4 +52,17 @@ public class RoomServiceImpl implements RoomService {
 		return roomData.isPresent();
 	}
 
+	@Override
+	public List<Room> roomByStatus(boolean roomStatus) {
+	
+		return roomRepository.findByRoomStatus(roomStatus);
+	}
+
+	@Override
+	public int updateStatus(int roomId, boolean roomStatus) {
+		
+		return roomRepository.updateStatusByRoom(roomStatus, roomId);
+	}
+
+
 }

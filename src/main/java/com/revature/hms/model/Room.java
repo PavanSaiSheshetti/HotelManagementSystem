@@ -34,5 +34,8 @@ public class Room {
 	@Column(nullable=false)
 	private String roomView;
 	
+	@Column
+	private boolean roomStatus=false;
 	
 }
+

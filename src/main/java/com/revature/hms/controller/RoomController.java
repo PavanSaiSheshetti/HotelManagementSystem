@@ -19,11 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.hms.model.Room;
 import com.revature.hms.service.RoomService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 
 @RestController
 
 @RequestMapping("room")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RoomController {
 
 	@Autowired
@@ -106,6 +107,24 @@ public class RoomController {
 			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
 		else
 			return new ResponseEntity<>(roomService.getAllRooms(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateRoomByStatus/{roomId}/{roomStatus}")
+	public int updateRoomByStatus(@PathVariable("roomStatus")boolean roomStatus,@PathVariable("roomId")int roomId)
+	{
+		return roomService.updateStatus(roomId, roomStatus);
+		
+	}
+	
+	
+	@GetMapping("/roomByStatus/{roomStatus}")
+	public ResponseEntity<List<Room>> getAllRoomsByStatus(@PathVariable("roomStatus")boolean roomStatus) {
+
+		List<Room> roomList = roomService.roomByStatus(roomStatus);
+		if(roomList.size()==0)
+			return new ResponseEntity<>( HttpStatus.NO_CONTENT);
+		else
+			return new ResponseEntity<>(roomList, HttpStatus.OK);
 	}
 
 	
