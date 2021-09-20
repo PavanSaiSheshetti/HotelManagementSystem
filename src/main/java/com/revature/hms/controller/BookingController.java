@@ -88,51 +88,81 @@ public class BookingController {
 		}
 		return responseEntity;
 	}
-
-	@GetMapping("/bookedRoomsGreaterThan/{roomNumber}") // room number> 0
-	public List<Booking> allocatedRooms(@PathVariable("roomNumber") int roomNumber) {
-		LOGGER.info("******************** LIST OF CUSTOMER DETAILS GREATER THAN 0 ROOM NUMBERS");
-
+	
+	@GetMapping("/RetrieveBookingRoom/{roomNumber}")    //room number> 0 
+	public List<Booking> allocatedRooms(@PathVariable("roomNumber")int roomNumber)
+	{	LOGGER.info("******************** LIST OF CUSTOMER DETAILS GREATER THAN 0 ROOM NUMBERS");
+	
 		return bookingService.viewBookedRooms(roomNumber);
 
 	}
 
-	@GetMapping("/cancelledRooms/{cancellation}") // cancellations = yes
-	public List<Booking> cancelledRooms(@PathVariable("cancellation") String cancellation) {
+	@GetMapping("/cancelledRooms/{cancellation}")	//cancellations = yes
+	public List<Booking>cancelledRooms(@PathVariable("cancellation")String cancellation)
+	{
 		LOGGER.info("******************** LIST OF CANCELLED ROOMS DETAILS FROM BOOKING RECORDS ");
 		return bookingService.viewCancellations(cancellation);
 	}
-
-	@PutMapping
-	public ResponseEntity<String> updateBookingRecord(@RequestBody Booking booking) {
-		ResponseEntity<String> responseEntity = null;
-		String from = "Taj-Restaurant";
-		String subject = "Room Booking Status";
-		int bookingRoom = booking.getRoomNumber();
-		String message = null;
+	
+	@GetMapping("/bookingByUserName/{customerUserName}")
+	public Booking getBookingByUserName(@PathVariable("customerUserName")String customerUserName)
+	{
+		LOGGER.info("******************** LIST OF BOOKED ROOMS DETAILS FROM USERNAME BOOKING RECORDS ");
+		return bookingService.findByUserName(customerUserName);
+	}
+	
+	@PutMapping("/updateBookingByRoomNumber/{roomNumber}/{userName}")
+	public ResponseEntity<Booking> updateBookingRecord(@PathVariable("roomNumber")int roomNumber,@PathVariable("userName")String userName)
+	{
+		System.out.println(" not upda");
+		ResponseEntity<Booking> responseEntity = null;
+		Booking booking = new Booking();
+		int bookingRoom =roomNumber;
+		String message=null;
 		LOGGER.info("******************** ROOM NUMBER IS ALLOCATED TO CUSTOMER ");
 
 		if (bookingService.isRoomNumberExists(bookingRoom))// 200
 		{
 			LOGGER.info("******************** ROOM IS FILLED");
-
-			message = "Room : " + bookingRoom + " 	already allocated, Please allocate other room";
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
-		} else {
-			LOGGER.info("******************** ROOM IS EMPTY, ALLOCATE ROOM ");
-
-			result = bookingService.updateRecord(booking);
-			String username = booking.getCustomerUserName();
-			booking = bookingService.findByUserName(username);
-			String toUserMail = booking.getEmail();
-			message = "Congratulations! and Hearty Welcome " + "\n Dear " + booking.getCustomerUserName() + "\n"
-					+ "You have successfully Booked a room in our Hotel with Room no : " + booking.getRoomNumber()
-					+ "With an initial Amount of INR: " + booking.getRoomPrice();
-			mailApplication.sendMail(from, toUserMail, subject, message);
-			LOGGER.info("Mail Sent Successfully...");
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+			
+		message = "Room : "+bookingRoom+" 	already allocated, Please allocate other room";
+		responseEntity = new ResponseEntity<Booking>(booking,HttpStatus.OK);
 		}
+		else
+		{
+			System.out.println(" not updated"+roomNumber);
+			LOGGER.info("******************** ROOM IS EMPTY, ALLOCATE ROOM ");
+			Booking booking1=bookingService.findByUserName(userName);
+			result = bookingService.updateRecord(userName,roomNumber);
+			System.out.println("updated"+roomNumber);
+			
+			 
+			responseEntity = new ResponseEntity<Booking>(booking1,HttpStatus.OK);
+	}
 		return responseEntity;
 	}
-
+	
+	@GetMapping("tosendMail/{userName}")
+	public ResponseEntity<String> mailBookingRecord(@PathVariable("userName")String userName)
+	{
+		//String username = booking.getCustomerUserName();
+		ResponseEntity<String> responseEntity = null;
+		String from = "Taj-Restaurant";
+		 String subject="Room Booking Status";
+		  Booking booking1=bookingService.findByUserName(userName);
+		  int roomNumber =booking1.getRoomNumber(); 
+		  System.out.println("mail "+roomNumber); 
+		  String toUserMail =booking1.getEmail();
+		  String message = "Congratulations! and Hearty Welcome "+
+		  "\n Dear "+booking1.getCustomerUserName()+"\n"
+		  +"You have successfully Booked a room in our Hotel with Room no : "
+		  +roomNumber+ "With an initial Amount of INR: "+booking1.getRoomPrice();
+		  mailApplication.sendMail(from, toUserMail,subject , message);
+		  
+		  responseEntity = new ResponseEntity<String>(message,HttpStatus.OK);
+		 LOGGER.info("Mail Sent Successfully...");
+		return responseEntity;
+	}
+	
+	
 }

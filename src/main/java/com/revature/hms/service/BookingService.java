@@ -17,7 +17,7 @@ public interface BookingService {
 
 	public boolean deleteRecord(String userName);
 
-	public boolean updateRecord(Booking booking);
+	public boolean updateRecord(String userName,int roomNumber);
 
 	public boolean deleteByUserName(String userName);
 
