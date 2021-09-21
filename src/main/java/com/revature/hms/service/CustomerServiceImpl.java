@@ -1,4 +1,4 @@
-package com.revature.hms.service;
+package com.hotel.booking.project3.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.hms.model.Bill;
-import com.revature.hms.model.Booking;
-import com.revature.hms.model.Customer;
-import com.revature.hms.model.PickupAndDrop;
-import com.revature.hms.repository.BillRepository;
-import com.revature.hms.repository.BookingRepository;
-import com.revature.hms.repository.CustomerRepository;
-import com.revature.hms.repository.PickupAndDropRepository;
+import com.hotel.booking.project3.model.Bill;
+import com.hotel.booking.project3.model.Booking;
+import com.hotel.booking.project3.model.Customer;
+import com.hotel.booking.project3.model.PickupAndDrop;
+import com.hotel.booking.project3.repository.BillRepository;
+import com.hotel.booking.project3.repository.BookingRepository;
+import com.hotel.booking.project3.repository.CustomerRepository;
+import com.hotel.booking.project3.repository.PickupAndDropRepository;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -93,14 +93,14 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public boolean cancelBooking(int bookingId) {
 		bookingRepository.deleteById(bookingId);
-		return true;
+		return false;
 	}
 
 
 	@Override
 	public int addPickAndDrop(PickupAndDrop pickupAndDrop) {
 		pickupAndDropRepository.save(pickupAndDrop);
-		int pickupAndDropId = pickupAndDrop.getPickupAndDropId();
+		int pickupAndDropId = pickupAndDrop.getPickupDropId();
 		return pickupAndDropId;
 	}
 
@@ -146,6 +146,19 @@ public class CustomerServiceImpl implements CustomerService {
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public Booking viewBookingById(int booingId) {
+		Booking booking = bookingRepository.findByBookingId(booingId);
+		return booking;
+	}
+
+	@Override
+	public PickupAndDrop getPickupAndDrop(int pickupAndDropId) {
+		PickupAndDrop pickupAndDrop = pickupAndDropRepository.findByPickupDropId(pickupAndDropId);
+		return pickupAndDrop;
+//		return null;
 	}
 
 }
