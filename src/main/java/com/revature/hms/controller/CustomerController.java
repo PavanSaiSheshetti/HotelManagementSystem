@@ -1,4 +1,4 @@
-package com.hotel.booking.project3.controller;
+package com.revature.hms.controller;
 
 import java.util.ArrayList;
 import java.util.List;
