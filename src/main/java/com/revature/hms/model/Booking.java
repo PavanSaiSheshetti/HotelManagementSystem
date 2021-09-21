@@ -60,15 +60,9 @@ public class Booking {
 	@Column(nullable=false)
 	private int numberOfMembers;
 	
-	@Basic
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Calendar checkInDate;
+	private String checkInDate;
 	
-	@Basic
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Calendar checkOutDate;
+	private String checkOutDate;
 	
 	@Column
 	private int roomNumber;
