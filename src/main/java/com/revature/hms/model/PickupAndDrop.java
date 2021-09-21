@@ -13,8 +13,7 @@ import lombok.Data;
 @Table(name = "pickupandropdetails")
 public class PickupAndDrop {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int pickupAndDropId; 
+	private int pickupDropId; 
 	private String location;
 	private String typeOfTransport;
 	private String time;
