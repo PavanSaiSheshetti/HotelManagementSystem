@@ -1,4 +1,4 @@
-package com.revature.hms.controller;
+package com.hotel.booking.project3.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.hms.model.Bill;
-import com.revature.hms.model.Booking;
-import com.revature.hms.model.Customer;
-import com.revature.hms.model.ForgetPassword;
-import com.revature.hms.model.PickupAndDrop;
-import com.revature.hms.service.CustomerService;
+import com.hotel.booking.project3.model.Bill;
+import com.hotel.booking.project3.model.Booking;
+import com.hotel.booking.project3.model.Customer;
+import com.hotel.booking.project3.model.ForgetPassword;
+import com.hotel.booking.project3.model.PickupAndDrop;
+import com.hotel.booking.project3.service.CustomerService;
 
 @RestController
 @RequestMapping("/customer")
@@ -38,7 +38,7 @@ public class CustomerController {
 		String message = null;
 		customerService.customerSignup(customer);
 		message = "Sign up Successfully ";
-		responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+		responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
 		return responseEntity;
 	}
 	
@@ -140,13 +140,29 @@ public class CustomerController {
 		String message = null;
 
 		if (customerService.isPickAndDropExists(pickupAndDropId)) {
-			pickupAndDrop.setPickupAndDropId(pickupAndDropId);
+			pickupAndDrop.setPickupDropId(pickupAndDropId);
 			customerService.updatePickAndDrop(pickupAndDrop);
 			message = "updated successfully";
 			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
 		} else {
 			message = "PickupAndDrop ID is not Exist";
 			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
+		}
+		return responseEntity;
+	}
+	@GetMapping("/getPickAndDrop/{pickupAndDropId}")
+	public ResponseEntity<PickupAndDrop> getPickAndDrop(@PathVariable("pickupAndDropId") int pickupAndDropId) {
+		ResponseEntity<PickupAndDrop> responseEntity = null;
+		PickupAndDrop pickupAndDrop = new PickupAndDrop();
+		String message = null;
+		
+		if (customerService.isPickAndDropExists(pickupAndDropId)) {
+			pickupAndDrop = customerService.getPickupAndDrop(pickupAndDropId); 
+			message = "updated successfully";
+			responseEntity = new ResponseEntity<PickupAndDrop>(pickupAndDrop, HttpStatus.OK);
+		} else {
+			message = "PickupAndDrop ID is not Exist";
+			responseEntity = new ResponseEntity<PickupAndDrop>(pickupAndDrop, HttpStatus.NO_CONTENT);
 		}
 		return responseEntity;
 	}
@@ -159,10 +175,10 @@ public class CustomerController {
 		if (customerService.isPickAndDropExists(pickupAndDropId)) {
 			customerService.cancelPickAndDrop(pickupAndDropId);
 			message = "Deleted successfully";
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
 		} else {
 			message = "PickupAndDrop ID is not Exist";
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
 		}
 		return responseEntity;
 	}
@@ -209,6 +225,19 @@ public class CustomerController {
 		}
 		return responseEntity;
 	}
+	@GetMapping("/viewBookingByRoomId/{roomId}")
+	public ResponseEntity<Booking> showBookingByRoomId(@PathVariable("roomId") int roomId) {
+		ResponseEntity<Booking> responseEntity = null;
+		Booking booking = new Booking();
+		if (customerService.isBookingExists(roomId)) {
+//			bookings = customerService.viewBookingHistory(customerUserName);
+			booking =  customerService.viewBookingById(roomId);
+			responseEntity = new ResponseEntity<Booking>(booking, HttpStatus.OK);
+		} else {
+			responseEntity = new ResponseEntity<Booking>(booking, HttpStatus.NOT_FOUND);
+		}
+		return responseEntity;
+	}
 	@PutMapping("/updateBooking/{bookingId}")
 	public ResponseEntity<String> updateBooking(@RequestBody Booking booking,@PathVariable("bookingId") int bookingId) {
 		ResponseEntity<String> responseEntity = null;
@@ -234,10 +263,10 @@ public class CustomerController {
 		if (customerService.isBookingExists(bookingId)) {
 			customerService.cancelBooking(bookingId);
 			message = "Deleted successfully";
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
 		} else {
 			message = "Booking ID is not Exist";
-			responseEntity = new ResponseEntity<String>(message, HttpStatus.NO_CONTENT);
+			responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
 		}
 		return responseEntity;
 	}
