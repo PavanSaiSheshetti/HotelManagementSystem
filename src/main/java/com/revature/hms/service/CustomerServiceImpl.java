@@ -1,4 +1,4 @@
-package com.hotel.booking.project3.service;
+package com.revature.hms.service;
 
 import java.util.List;
 import java.util.Optional;
