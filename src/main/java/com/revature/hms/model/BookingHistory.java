@@ -63,15 +63,15 @@ public class BookingHistory {
 	@Column(nullable=false)
 	private int numberOfMembers;
 	
-	@Basic
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Calendar checkInDate;
+//	@Basic
+//	@Temporal(TemporalType.DATE)
+//	@Column(nullable=false)
+	private String checkInDate;
 	
-	@Basic
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Calendar checkOutDate;
+//	@Basic
+//	@Temporal(TemporalType.DATE)
+//	@Column(nullable=false)
+	private String checkOutDate;
 	
 	@Column
 	private int roomNumber;

@@ -33,5 +33,7 @@ public interface BookingRepository extends CrudRepository<Booking,Integer>{
 	@Modifying
 	@Query(value = "UPDATE Booking b set b.roomNumber=:roomNumber where b.customerUserName =:customerUserName")
 	public int updateRoomNumber(@Param("customerUserName") String customerUserName, @Param("roomNumber") int roomNumber);
+	
+	public Booking findByBookingId(int bookingId);
 
 }

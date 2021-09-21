@@ -6,14 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hotel.booking.project3.model.Bill;
-import com.hotel.booking.project3.model.Booking;
-import com.hotel.booking.project3.model.Customer;
-import com.hotel.booking.project3.model.PickupAndDrop;
-import com.hotel.booking.project3.repository.BillRepository;
-import com.hotel.booking.project3.repository.BookingRepository;
-import com.hotel.booking.project3.repository.CustomerRepository;
-import com.hotel.booking.project3.repository.PickupAndDropRepository;
+import com.revature.hms.model.Bill;
+import com.revature.hms.model.Booking;
+import com.revature.hms.model.Customer;
+import com.revature.hms.model.PickupAndDrop;
+import com.revature.hms.repository.BillRepository;
+import com.revature.hms.repository.BookingRepository;
+import com.revature.hms.repository.CustomerRepository;
+import com.revature.hms.repository.PickupAndDropRepository;
+
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -149,8 +150,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Booking viewBookingById(int booingId) {
-		Booking booking = bookingRepository.findByBookingId(booingId);
+	public Booking viewBookingById(int bookingId) {
+		Booking booking = bookingRepository.findByBookingId(bookingId);
 		return booking;
 	}
 

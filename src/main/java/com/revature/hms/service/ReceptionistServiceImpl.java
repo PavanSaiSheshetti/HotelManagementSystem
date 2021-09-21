@@ -30,12 +30,8 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 	@Override
 	public boolean receptionistLogin(int receptionistId, String receptionistPassword) {
 		Optional<Receptionist> receptionistData = receptionistRepository.findByReceptionistIdAndReceptionistPassword(receptionistId, receptionistPassword);
-		if(receptionistData!=null) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return receptionistData.isPresent();
+
 		 
 	}
 	

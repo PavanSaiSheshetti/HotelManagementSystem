@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.HotelBookingSystemApplication;
 import com.revature.hms.model.Booking;
 import com.revature.hms.model.Receptionist;
 import com.revature.hms.model.Wallet;
@@ -40,6 +41,9 @@ public class ReceptionController {
 
 	@Autowired
 	BookingService bookingService;
+	
+	  @Autowired
+		HotelBookingSystemApplication mailApplication;
 
 	@Autowired
 	private BookingHistoryService bookingHistoryService;
@@ -63,7 +67,7 @@ public class ReceptionController {
 		
 	}
 
-	@PutMapping("{receptionistId}")
+	@PutMapping
 	public ResponseEntity<String> updateMyProfile(@RequestBody Receptionist receptionist) {
 		ResponseEntity<String> responseEntity = null;
 		int receptionistId = receptionist.getReceptionistId();
@@ -115,10 +119,12 @@ public class ReceptionController {
 		return responseEntity;
 	}
 
-	@PostMapping("/save")
-	public ResponseEntity<String> addWallet(@RequestBody Wallet wallet) {
+	@PostMapping("/save/{userName}/{money}")
+	public ResponseEntity<String> addWallet(@PathVariable("userName") String userName,
+			@PathVariable("money") int money) {
 
 		ResponseEntity<String> responseEntity = null;
+		Wallet wallet=new Wallet(userName,money);
 		walletService.addWallet(wallet);
 		responseEntity = new ResponseEntity<String>("wallet added successfully", HttpStatus.OK);
 		return responseEntity;
@@ -331,4 +337,29 @@ public class ReceptionController {
 		}
 		return responseEntity;
 	}
+	
+
+@GetMapping("/forgetpassword/{receptionistEmail}")
+	public ResponseEntity<String> forgetPassword(@PathVariable String receptionistEmail){
+		ResponseEntity<String> responseEntity = null;
+		 String message= null;
+		 String from = "Taj-Restaurant";
+		 String subject="Registration Status";
+		 Receptionist receptionist = null; 
+		 receptionist = receptionistService.getReceptionistByReceptionistEmail(receptionistEmail);
+	      if(receptionist!=null) {
+		 String toReceiver = receptionist.getReceptionistEmail();
+		   message="Dear "+receptionist.getReceptionistName()+" ,"+ 
+		           "\n Request has been placed and your login details are "+
+				   "\n Your login Id is:"+receptionist.getReceptionistId()+
+		           "\n Your Password is:" +receptionist.getReceptionistPassword()+
+		           "\n Continue your work with us";   
+		   mailApplication.sendMail(from, toReceiver, subject, message);
+		    responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+	      }else 
+	    	  
+	    	  responseEntity = new ResponseEntity<String>(message, HttpStatus.NOT_FOUND);
+	      return responseEntity;
+	}
+
 }

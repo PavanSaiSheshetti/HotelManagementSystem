@@ -2,10 +2,10 @@ package com.revature.hms.service;
 
 import java.util.List;
 
-import com.hotel.booking.project3.model.Bill;
-import com.hotel.booking.project3.model.Booking;
-import com.hotel.booking.project3.model.Customer;
-import com.hotel.booking.project3.model.PickupAndDrop;
+import com.revature.hms.model.Bill;
+import com.revature.hms.model.Booking;
+import com.revature.hms.model.Customer;
+import com.revature.hms.model.PickupAndDrop;
 
 public interface CustomerService {
 

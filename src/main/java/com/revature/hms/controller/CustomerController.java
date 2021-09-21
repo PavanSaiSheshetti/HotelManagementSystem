@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.booking.project3.model.Bill;
-import com.hotel.booking.project3.model.Booking;
-import com.hotel.booking.project3.model.Customer;
-import com.hotel.booking.project3.model.ForgetPassword;
-import com.hotel.booking.project3.model.PickupAndDrop;
-import com.hotel.booking.project3.service.CustomerService;
+import com.revature.hms.model.Bill;
+import com.revature.hms.model.Booking;
+import com.revature.hms.model.Customer;
+import com.revature.hms.model.ForgetPassword;
+import com.revature.hms.model.PickupAndDrop;
+import com.revature.hms.service.CustomerService;
+
 
 @RestController
 @RequestMapping("/customer")
