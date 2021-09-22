@@ -82,8 +82,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Booking> viewBookingHistory(String customerUserName) {
-		return (List<Booking>) bookingRepository.findByCustomerUserName(customerUserName);
-	}
+		return (List<Booking>) bookingRepository.findByUserName(customerUserName);
+	
 
 	@Override
 	public boolean updateBooking(Booking booking) {
