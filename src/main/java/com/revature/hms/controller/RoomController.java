@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.hms.model.OfferDetails;
 import com.revature.hms.model.Room;
 import com.revature.hms.service.RoomService;
 
@@ -115,6 +116,37 @@ public class RoomController {
 		return roomService.updateStatus(roomId, roomStatus);
 		
 	}
+	
+	@GetMapping("getRoom/{roomType}/{roomSize}")
+	public ResponseEntity<Room>  getRoomByRoomTypeAndRoomSize(@PathVariable("roomType") String roomType,@PathVariable("roomSize") String roomSize) {
+	
+		Room room = new Room();
+		room=roomService.findByRoomTypeAndRoomSize(roomType,roomSize);
+		System.out.println(room);
+		if(room == null) {
+		return new ResponseEntity<Room> (room,HttpStatus.CONFLICT);
+		}
+		else {
+			
+			return new ResponseEntity<Room> (room,HttpStatus.OK);
+		}
+			
+	}
+	
+	@PostMapping("insertRoom/{roomType}/{roomSize}")
+	public ResponseEntity<Boolean>  insertRoomByCustomer(@PathVariable("roomType") String roomType,@PathVariable("roomSize") String roomSize) {
+	
+		boolean result = roomService.insertRoomByCustomer(roomType, roomSize, 0);
+		if(result) {
+		return new ResponseEntity<Boolean> (result,HttpStatus.OK);
+		}
+		else {
+			
+			return new ResponseEntity<Boolean> (result,HttpStatus.CONFLICT);
+		}
+			
+	}
+	
 	
 	
 	@GetMapping("/roomByStatus/{roomStatus}")

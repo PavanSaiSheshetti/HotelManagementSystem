@@ -26,4 +26,6 @@ public interface BookingService {
 	public Booking findByUserName(String userName);
 	
 	public List<BookingHistory> getBookingsHistory();
+	
+	public boolean updatePrice(int price,String userName);
 }

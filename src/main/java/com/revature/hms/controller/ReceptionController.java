@@ -249,6 +249,26 @@ public class ReceptionController {
 		}
 		return responseEntity;
 	}
+	
+	
+	@PutMapping("/updatePrice/{customerUserName}/{price}")
+	public ResponseEntity<Boolean> updatePrice(@PathVariable String customerUserName,
+			@PathVariable int price) {// Working
+		ResponseEntity<Boolean> responseEntity = null;
+
+		boolean result = bookingService.updatePrice(price, customerUserName);
+		if(result) {
+			responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
+
+		}
+		else {
+			responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.BAD_REQUEST);
+
+		}
+		return responseEntity;
+	}
+	
+	
 
 	@PutMapping("status/{userName}/{status}")
 	public ResponseEntity<String> updateStatus(@PathVariable String userName, @PathVariable String status) {

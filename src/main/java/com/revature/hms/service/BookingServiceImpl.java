@@ -109,4 +109,11 @@ public class BookingServiceImpl implements BookingService {
 		List<BookingHistory> bookingsHistoryList = bookingsHistoryRepository.findAll();
 		return bookingsHistoryList;
 	}
+
+	@Override
+	public boolean updatePrice(int price, String userName) {
+		// TODO Auto-generated method stub
+		bookingRepository.updatePrice(price, userName);
+		return true;
+	}
 }

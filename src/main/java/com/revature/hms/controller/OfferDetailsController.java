@@ -70,6 +70,7 @@ public class OfferDetailsController {
 	}
 	
 	
+	
 	//localhost:9090/hoteloffer
 	
 	@PostMapping

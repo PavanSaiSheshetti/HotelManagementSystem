@@ -10,11 +10,12 @@ public interface RoomService {
 	public boolean addRoom(Room room);
 	public boolean deleteRoom(int roomId);
 	public boolean updateRoom(Room room);
-	public Room getRoomById(int roomId);
-	
+	public Room getRoomById(int roomId);	
 	public List<Room> getAllRooms();
 	public boolean isRoomExists(int roomId);
 	public List<Room> roomByStatus(boolean roomStatus);
 	public int updateStatus(int roomId,boolean roomStatus);
+	public Room findByRoomTypeAndRoomSize(String roomType,String roomSize);
+	public boolean insertRoomByCustomer(String roomType,String roomSize,int price);
 
 }
