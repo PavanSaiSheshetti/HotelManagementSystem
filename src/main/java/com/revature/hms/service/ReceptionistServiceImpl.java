@@ -12,7 +12,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.hms.model.Bill;
 import com.revature.hms.model.Receptionist;
+import com.revature.hms.repository.BillRepository;
 import com.revature.hms.repository.ReceptionistRepository;
 
 
@@ -22,6 +24,9 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 	
 	@Autowired
 	ReceptionistRepository receptionistRepository;
+	
+	@Autowired
+	BillRepository billRepository;
 	
 	@Autowired
 	@PersistenceContext
@@ -136,6 +141,13 @@ public class ReceptionistServiceImpl implements ReceptionistService{
 	public List<Receptionist> getReceptionistByEmail(String receptionistEmail) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean addBill(Bill bill) {
+		// TODO Auto-generated method stub
+		billRepository.save(bill);
+		return true;
 	}
 
 

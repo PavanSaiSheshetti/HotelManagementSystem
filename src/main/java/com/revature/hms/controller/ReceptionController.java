@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.HotelBookingSystemApplication;
+import com.revature.hms.model.Bill;
 import com.revature.hms.model.Booking;
 import com.revature.hms.model.Receptionist;
 import com.revature.hms.model.Wallet;
@@ -282,10 +283,11 @@ public class ReceptionController {
 
 			price = (price / 100) * 10;
 			boolean result = walletService.deductMoney(userName, price);
+			
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
-				String subject = "Thank you booking with us";
+				String subject = "Thank you for booking with us";
 				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for making an booking with us your booking has been processed"
 						+ "Your payment during the booking of you hotel room has been reducted successfully from your respective wallet."
@@ -302,7 +304,7 @@ public class ReceptionController {
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
-				String subject = "Thank you booking with us";
+				String subject = "Thank you for booking with us";
 				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for Checking in with your booking, your booking status has been processed"
 						+ "Your payment during the checkin of the hotel room has been reducted successfully from your respective wallet."
@@ -315,10 +317,11 @@ public class ReceptionController {
 		} else if (status.compareToIgnoreCase("OUT") == 0) {
 			price = (price / 100) * 50;
 			boolean result = walletService.deductMoney(userName, price);
+			
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
-				String subject = "Thank you booking with us";
+				String subject = "Thank you for booking with us";
 				String message = "Dear " + userName + "," + "\n"
 						+ "\n Thank you for Checking out with your booking, your booking status has been processed"
 						+ "Your payment during the checkout of the hotel room has been reducted successfully from your respective wallet."
@@ -335,6 +338,28 @@ public class ReceptionController {
 
 		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
 		return responseEntity;
+	}
+	
+	@PostMapping("/addBill/{userName}")
+	public ResponseEntity<Boolean> addBill(@RequestBody Bill bill,@PathVariable String userName){
+		ResponseEntity<Boolean> responseEntity = null;
+		System.out.println(bill);
+		boolean result = receptionistService.addBill(bill);
+		bookingHistoryService.addToHistory(userName);
+		bookingService.deleteRecord(userName);
+
+		if(result) {
+			responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.OK);
+
+		}
+		else {
+			responseEntity = new ResponseEntity<Boolean>(result, HttpStatus.CONFLICT);
+
+		}
+		
+		return responseEntity;
+		
+		
 	}
 
 	@SuppressWarnings("unused")

@@ -31,6 +31,8 @@ public interface CustomerService {
 	
 	public boolean updatePickupDropStatus(String status,String userName);
 	public List<Bill> viewBill(String customerUserName);
+	
+	
 //	
-//	public int getCustomerId(String customerUserName);
+	//public int getCustomerId(String customerUserName);
 }
