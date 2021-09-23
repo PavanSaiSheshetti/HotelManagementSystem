@@ -36,6 +36,11 @@ public interface BookingRepository extends CrudRepository<Booking,Integer>{
 	
 	@Transactional
 	@Modifying
+	@Query(value = "UPDATE FROM Booking set pickupAndDrop= ?2 where customerUserName = ?1")
+	public void updatePickupDropStatus(String userName,String status);
+	
+	@Transactional
+	@Modifying
 	@Query(value = "UPDATE Booking b set b.roomNumber=:roomNumber where b.customerUserName =:customerUserName")
 	public int updateRoomNumber(@Param("customerUserName") String customerUserName, @Param("roomNumber") int roomNumber);
 	

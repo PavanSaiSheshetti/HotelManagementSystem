@@ -21,6 +21,7 @@ import com.revature.hms.model.Booking;
 import com.revature.hms.model.Customer;
 import com.revature.hms.model.ForgetPassword;
 import com.revature.hms.model.PickupAndDrop;
+import com.revature.hms.service.BookingService;
 import com.revature.hms.service.CustomerService;
 
 
@@ -32,6 +33,8 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
+	@Autowired
+	BookingService bookingService;
 	
 	@PostMapping
 	public ResponseEntity<String> customerSignup(@RequestBody Customer customer) {
@@ -271,5 +274,15 @@ public class CustomerController {
 		}
 		return responseEntity;
 	}
+	
+	@PutMapping("updatePickupDropStatus/{userName}/{status}")
+	public ResponseEntity<String> updatePickupDropStatus(@PathVariable String userName, @PathVariable String status) {
+
+		ResponseEntity<String> responseEntity = null;
+		customerService.updatePickupDropStatus(status, userName);
+		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
+		return responseEntity;
+	}
+
 	
 }

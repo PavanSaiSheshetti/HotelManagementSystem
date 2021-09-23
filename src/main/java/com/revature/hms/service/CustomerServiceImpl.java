@@ -162,4 +162,11 @@ public class CustomerServiceImpl implements CustomerService {
 //		return null;
 	}
 
+	@Override
+	public boolean updatePickupDropStatus(String status,String userName) {
+		// TODO Auto-generated method stub
+		bookingRepository.updatePickupDropStatus(userName, status);
+		return true;
+	}
+
 }
