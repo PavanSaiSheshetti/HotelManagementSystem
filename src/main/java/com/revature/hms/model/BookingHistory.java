@@ -36,10 +36,10 @@ public class BookingHistory {
 	@Column(nullable= false)
 	private String customerName;
 	
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false)
 	private String customerMobileno;
 	
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false)
 	private String email;
 	
 	@Column

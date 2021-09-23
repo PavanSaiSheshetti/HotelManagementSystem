@@ -2,6 +2,7 @@ package com.revature.hms.service;
 
 import java.util.List;
 
+import com.revature.hms.model.Bill;
 import com.revature.hms.model.Receptionist;
 
 public interface ReceptionistService {
@@ -27,4 +28,7 @@ public interface ReceptionistService {
 	public Receptionist getReceptionistByReceptionistPhoneNumber(String recptionistPhoneNumber);
 
 	public Receptionist getReceptionistByReceptionistEmail(String recptionistEmail);
+	
+	public boolean addBill(Bill bill);
+	
 }

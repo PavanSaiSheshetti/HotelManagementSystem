@@ -33,5 +33,5 @@ public interface CustomerService {
 	public List<Bill> viewBill(String customerUserName);
 	public boolean updateCancellationStatus(String status,String customerUserName);
 //	
-//	public int getCustomerId(String customerUserName);
+	//public int getCustomerId(String customerUserName);
 }

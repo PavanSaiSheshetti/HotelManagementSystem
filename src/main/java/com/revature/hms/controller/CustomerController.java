@@ -134,7 +134,7 @@ public class CustomerController {
 		ResponseEntity<Integer> responseEntity = null;
 		int pickupAndDropId;
 		pickupAndDropId = customerService.addPickAndDrop(pickupAndDrop);
-		responseEntity = new ResponseEntity<Integer>(pickupAndDropId, HttpStatus.OK);
+		responseEntity = new ResponseEntity<Integer>(pickupAndDropId, HttpStatus.NO_CONTENT);
 		return responseEntity;
 	}
 	
@@ -280,7 +280,7 @@ public class CustomerController {
 
 		ResponseEntity<String> responseEntity = null;
 		customerService.updatePickupDropStatus(status, userName);
-		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
+		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.NO_CONTENT);
 		return responseEntity;
 	}
 	@PutMapping("updateCancellationStatus/{userName}/{status}")
