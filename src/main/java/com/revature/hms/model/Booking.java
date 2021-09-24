@@ -71,7 +71,7 @@ public class Booking {
 	private String pickupAndDrop;
 	
 	@Column
-	private String cancellation="False";
+	private String cancellation="no";
 	
 	@Column(nullable=false)
 	private String bookingStatus="Pending";

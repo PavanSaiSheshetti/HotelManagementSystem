@@ -169,12 +169,6 @@ public class CustomerServiceImpl implements CustomerService {
 		return true;
 	}
 
-	@Override
-	public boolean updateCancellationStatus(String customerUserName, String status) {
-		// TODO Auto-generated method stub
-		System.out.println(customerUserName +"   "+status);
-		bookingRepository.updateCancellation(status, customerUserName);
-		return true;
-	}
+	
 
 }

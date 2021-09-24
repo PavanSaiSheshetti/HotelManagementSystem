@@ -287,7 +287,7 @@ public class CustomerController {
 	public ResponseEntity<String> updateCancellationStatus(@PathVariable String userName, @PathVariable String status) {
 
 		ResponseEntity<String> responseEntity = null;
-		customerService.updateCancellationStatus(status, userName);
+		bookingService.updateCancellationStatus(status, userName);
 		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
 		return responseEntity;
 	}	

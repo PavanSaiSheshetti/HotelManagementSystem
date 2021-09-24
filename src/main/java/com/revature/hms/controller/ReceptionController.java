@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -275,14 +276,24 @@ public class ReceptionController {
 	public ResponseEntity<String> updateStatus(@PathVariable String userName, @PathVariable String status) {
 
 		ResponseEntity<String> responseEntity = null;
-		bookingService.updateStatus(userName, status);
+		
 		Booking booking = bookingService.findByUserName(userName);
-		status = booking.getBookingStatus();
 		int price = booking.getRoomPrice();
 		if (status.compareToIgnoreCase("booked") == 0) {
 
 			price = (price / 100) * 10;
+			System.out.println(price);
+			Wallet wallet = walletService.getCustomerBalance(userName);
+			int customerMoney = wallet.getMoney();
+			System.out.println(customerMoney);
+			if(price>customerMoney) {
+				System.out.println("Inside sufficinet");
+				responseEntity = new ResponseEntity<String>("insufficient balance", HttpStatus.CONFLICT);
+			}
+			else {
+		
 			boolean result = walletService.deductMoney(userName, price);
+			bookingService.updateStatus(userName, status);
 			
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
@@ -297,10 +308,23 @@ public class ReceptionController {
 				walletService.sendMail(from, to, subject, message);
 				responseEntity = new ResponseEntity<String>("10% money deducted", HttpStatus.OK);
 			}
-			responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.OK);
+			else {
+				responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.CONFLICT);
+
+			}
+			}
+			
+			//responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.OK);
 		} else if (status.compareToIgnoreCase("IN") == 0) {
 			price = (price / 100) * 40;
+			Wallet wallet = walletService.getCustomerBalance(userName);
+			int customerMoney = wallet.getMoney();
+			if(price>customerMoney) {
+				responseEntity = new ResponseEntity<String>("insufficient balance", HttpStatus.CONFLICT);
+			}
+			else {
 			boolean result = walletService.deductMoney(userName, price);
+			bookingService.updateStatus(userName, status);
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
 				String to = booking.getEmail();
@@ -314,9 +338,18 @@ public class ReceptionController {
 				walletService.sendMail(from, to, subject, message);
 				responseEntity = new ResponseEntity<String>("40% money deducted", HttpStatus.OK);
 			}
+			}
 		} else if (status.compareToIgnoreCase("OUT") == 0) {
 			price = (price / 100) * 50;
+			Wallet wallet = walletService.getCustomerBalance(userName);
+			int customerMoney = wallet.getMoney();
+			if(price>customerMoney) {
+				responseEntity = new ResponseEntity<String>("insufficient balance", HttpStatus.CONFLICT);
+			}
+			else {
+			
 			boolean result = walletService.deductMoney(userName, price);
+			bookingService.updateStatus(userName, status);
 			
 			if (result) {
 				String from = "naveedimran2802@gmail.com";
@@ -331,12 +364,15 @@ public class ReceptionController {
 				walletService.sendMail(from, to, subject, message);
 				responseEntity = new ResponseEntity<String>("50% percent money deducted", HttpStatus.OK);
 			}
+			}
 
-		} else {
+		}
+		else {
 			responseEntity = new ResponseEntity<String>("some problem occured", HttpStatus.BAD_REQUEST);
 		}
+		
 
-		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
+		
 		return responseEntity;
 	}
 	

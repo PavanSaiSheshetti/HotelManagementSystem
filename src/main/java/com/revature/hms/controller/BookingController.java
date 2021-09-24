@@ -164,5 +164,13 @@ public class BookingController {
 		return responseEntity;
 	}
 	
+	@PutMapping("updateCancellationStatus/{userName}/{status}")
+	public ResponseEntity<String> updateCancellationStatus(@PathVariable String userName, @PathVariable String status) {
+
+		ResponseEntity<String> responseEntity = null;
+		bookingService.updateCancellationStatus(status, userName);
+		responseEntity = new ResponseEntity<String>("Updated successfully", HttpStatus.OK);
+		return responseEntity;
+	}	
 	
 }

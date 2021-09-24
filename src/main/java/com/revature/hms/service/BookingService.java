@@ -28,4 +28,7 @@ public interface BookingService {
 	public List<BookingHistory> getBookingsHistory();
 	
 	public boolean updatePrice(int price,String userName);
+	
+	public boolean updateCancellationStatus(String status,String customerUserName);
+
 }
