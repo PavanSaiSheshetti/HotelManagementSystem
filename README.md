@@ -1,7 +1,7 @@
-# HMS_spring_admin
-## Result (Home Page) :
+# Hotel Management System
+### Result (Home Page) :
 ![](https://github.com/PavanSaiSheshetti/HotelManagementSystem_Angular/blob/master/src/assets/img/image.png)
-## Note :
+### Note :
   This project is only spring project and please find related angular project [here](https://github.com/PavanSaiSheshetti/HMS_angular_admin). You will find complete 
   description of running project in Installation and Run Section
 ## Project Description
@@ -13,7 +13,24 @@ Admin allows the Receptionist activations and add Hotel rooms and the services o
 Receptionist allow to display what are the rooms are available & services are being offered.
 Customers need to register in order to book a room in a hotel from 1 day to 10 days maximum. Customer can also have the facilities of dropping/picking up from/to nearby location.
 
-## Actors and features of the Project
+
+## Technologies Used
+
+<ul><li> Core Java
+  <li>Microservices
+  <li>Spring Boot
+   <li>Spring Data
+  <li>Angular 10
+   <li>Spring AOP
+  <li>PostgreSql
+  <li>AwS RDS
+  <li> AWS EC2
+   <li> Docker
+    <li>Jenkins
+</ul>
+
+
+## Features
 <h4>Admin:</h4>
 <ul>
   <li> Admin should login before accessing the system</li>
@@ -40,17 +57,7 @@ Customers need to register in order to book a room in a hotel from 1 day to 10 d
 
 </ul>
 
-## Technologies Used
-
-<ul><li> Core Java
-  <li>Spring Boot
-   <li>Spring Data
-  <li>Angular
-  <li>PostgreSql
-  <li>AwS RDS
-</ul>
-
-## Technical Aspect:
+### Technical Aspect:
 <ul>
 <li>Used Spring Data for connecting to postgreSQL database </li>
 <li>Used DAO design pattern in the project
@@ -84,5 +91,5 @@ That's all you can run this project and see the results.
 <li>you can install visual studio code <a href="https://code.visualstudio.com/download">here</a></li>
 </ol>
 
-### Contributors :
+## Contributors :
 This Project is a batch project. Entire batch of 25 members worked on each modules and functionalities collaboratively.
