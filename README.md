@@ -93,3 +93,8 @@ That's all you can run this project and see the results.
 
 ## Contributors :
 This Project is a batch project. Entire batch of 25 members worked on each modules and functionalities collaboratively.
+
+### Bug / Feature Request:
+
+If you find a bug (the website couldn't handle the query and / or gave undesired results), kindly open an issue [here](https://github.com/PavanSaiSheshetti/HotelManagementSystem/issues/new) by including your search query and the expected result.
+
