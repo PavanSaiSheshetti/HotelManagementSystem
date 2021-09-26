@@ -85,4 +85,4 @@ That's all you can run this project and see the results.
 </ol>
 
 ### Contributors :
-This Project is a batch project. Entire batch of 25 members worked on each modules and functionalities collabratively.
+This Project is a batch project. Entire batch of 25 members worked on each modules and functionalities collaboratively.
